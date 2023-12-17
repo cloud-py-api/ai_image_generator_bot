@@ -6,14 +6,13 @@ import re
 import threading
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import Annotated
 from time import perf_counter
+from typing import Annotated, Any
 
 import torch
 from diffusers import AutoPipelineForText2Image
 from fastapi import BackgroundTasks, Depends, FastAPI, Response
 from huggingface_hub import snapshot_download
-
 from nc_py_api import AsyncNextcloudApp, NextcloudApp
 from nc_py_api.ex_app import (
     LogLvl,
@@ -58,14 +57,16 @@ async def lifespan(_app: FastAPI):
 
 APP = FastAPI(lifespan=lifespan)
 SD_BOT = AsyncTalkBot(
-    "/stable_diffusion", "Stable Diffusion", "@image cinematic shot of black pug wearing italian priest robe."
+    "/stable_diffusion",
+    "Stable Diffusion",
+    "@image cinematic shot of black pug wearing italian priest robe.",
 )
-TASK_LIST = queue.Queue(maxsize=1)
-PIPE = None
+TASK_LIST: queue.Queue = queue.Queue(maxsize=1)
+PIPE: Any = None
 
 
 class BackgroundProcessTask(threading.Thread):
-    def run(self, *args, **kwargs):
+    def run(self, *args, **kwargs):  # pylint: disable=unused-argument
         global PIPE
 
         while True:
@@ -75,7 +76,11 @@ class BackgroundProcessTask(threading.Thread):
                     print("loading model")
                     time_start = perf_counter()
                     PIPE = AutoPipelineForText2Image.from_pretrained(
-                        snapshot_download(MODEL_NAME, local_files_only=True, cache_dir=persistent_storage()),
+                        snapshot_download(
+                            MODEL_NAME,
+                            local_files_only=True,
+                            cache_dir=persistent_storage(),
+                        ),
                         **MODEL_RUNTIME_OPT,
                     )
                     if torch.cuda.is_available():
@@ -87,7 +92,7 @@ class BackgroundProcessTask(threading.Thread):
                 r = re.search(r"@image\s(.*)", task.object_content["message"], re.IGNORECASE)
                 print("generating image")
                 time_start = perf_counter()
-                im = PIPE(prompt=r.group(1), num_inference_steps=1, guidance_scale=0.0).images[0]
+                im = PIPE(prompt=r.group(1), num_inference_steps=1, guidance_scale=0.0).images[0]  # mypy
                 print(f"image generated: {perf_counter() - time_start}s")
                 nc = NextcloudApp()
                 nc.set_user(task.actor_id[len("users/") :])
@@ -96,7 +101,8 @@ class BackgroundProcessTask(threading.Thread):
                 im.save(im_out, format="PNG")
                 im_out.seek(0)
                 new_im = nc.files.upload_stream(
-                    f"image_generator_bot/{datetime.now().strftime('%Y-%m-%d-%H-%M-%S.%f')}.png", im_out
+                    f"image_generator_bot/{datetime.now().strftime('%Y-%m-%d-%H-%M-%S.%f')}.png",
+                    im_out,
                 )
                 nc.talk.send_file(new_im, task.conversation_token)
             except queue.Empty:
@@ -130,9 +136,13 @@ async def stable_diffusion(
 
 
 async def enabled_handler(enabled: bool, nc: AsyncNextcloudApp) -> str:
+    global PIPE
+
     print(f"enabled={enabled}")
     try:
         await SD_BOT.enabled_handler(enabled, nc)
+        if enabled is False:
+            PIPE = None
     except Exception as e:
         return str(e)
     return ""
