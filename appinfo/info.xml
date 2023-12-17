@@ -1,38 +1,40 @@
 <?xml version="1.0"?>
 <info>
-	<id>talk_bot_ai</id>
-	<name>TalkBotAI</name>
-	<summary>Nextcloud TalkBotAI Example</summary>
+	<id>ai_image_generator_bot</id>
+	<name>AIImageGeneratorBot</name>
+	<summary>Nextcloud ??</summary>
 	<description>
-	<![CDATA[Example of the Nextcloud Talk Bot + LLM written in python]]>
+	<![CDATA[????]]>
 	</description>
 	<version>1.0.0</version>
 	<licence>MIT</licence>
 	<author mail="andrey18106x@gmail.com" homepage="https://github.com/andrey18106">Andrey Borysenko</author>
 	<author mail="bigcat88@icloud.com" homepage="https://github.com/bigcat88">Alexander Piskun</author>
-	<namespace>TalkBotAIExample</namespace>
+	<namespace>AIImageGeneratorBot</namespace>
 	<category>tools</category>
-	<website>https://github.com/cloud-py-api/nc_py_api</website>
-	<bugs>https://github.com/cloud-py-api/nc_py_api/issues</bugs>
-	<repository type="git">https://github.com/cloud-py-api/nc_py_api</repository>
+	<website>https://github.com/cloud-py-api/ai_image_generator_bot</website>
+	<bugs>https://github.com/cloud-py-api/ai_image_generator_bot/issues</bugs>
+	<repository type="git">https://github.com/cloud-py-api/ai_image_generator_bot</repository>
 	<dependencies>
 		<nextcloud min-version="27" max-version="29"/>
 	</dependencies>
 	<external-app>
 		<docker-install>
 			<registry>ghcr.io</registry>
-			<image>cloud-py-api/talk_bot_ai</image>
-			<image-tag>latest</image-tag>
+			<image>cloud-py-api/ai_image_generator_bot</image>
+			<image-tag>1.0.0</image-tag>
 		</docker-install>
 		<scopes>
 			<required>
 				<value>TALK</value>
 				<value>TALK_BOT</value>
+				<value>FILES</value>
+				<value>FILES_SHARING</value>
 			</required>
 			<optional>
 			</optional>
 		</scopes>
 		<protocol>http</protocol>
-		<system>false</system>
+		<system>true</system>
 	</external-app>
 </info>

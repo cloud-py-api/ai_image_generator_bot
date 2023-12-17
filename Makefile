@@ -24,7 +24,7 @@ help:
 .PHONY: build-push
 build-push:
 	docker login ghcr.io
-	docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ghcr.io/cloud-py-api/ai_image_generator_bot:latest .
+	docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ghcr.io/cloud-py-api/ai_image_generator_bot:1.0.0 --tag ghcr.io/cloud-py-api/ai_image_generator_bot:latest .
 
 .PHONY: deploy
 deploy:
