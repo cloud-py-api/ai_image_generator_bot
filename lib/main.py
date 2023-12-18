@@ -33,13 +33,13 @@ MODEL_RUNTIME_OPT = {
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     if torch.cuda.is_available() or torch.backends.mps.is_available():
-        allow_patterns = ["*fp16.safetensors", "*.json", "*.txt"]
+        allow_patterns = ["*.fp16.safetensors", "*.json", "*.txt"]
         ignore_patterns = None
         MODEL_RUNTIME_OPT["torch_dtype"] = torch.float16
         MODEL_RUNTIME_OPT["variant"] = "fp16"
     else:
         allow_patterns = None
-        ignore_patterns = ["*onnx*", "*fp16*"]
+        ignore_patterns = ["*onnx*", "*fp16*", "sd_xl_turbo_1*"]
     set_handlers(
         APP,
         enabled_handler,
@@ -61,7 +61,7 @@ SD_BOT = AsyncTalkBot(
     "Stable Diffusion",
     "@image cinematic shot of black pug wearing italian priest robe.",
 )
-TASK_LIST: queue.Queue = queue.Queue(maxsize=1)
+TASK_LIST: queue.Queue = queue.Queue(maxsize=10)
 PIPE: Any = None
 
 
@@ -105,6 +105,7 @@ class BackgroundProcessTask(threading.Thread):
                     im_out,
                 )
                 nc.talk.send_file(new_im, task.conversation_token)
+                im = nc = im_out = None  # noqa
             except queue.Empty:
                 if PIPE:
                     print("offloading model")
