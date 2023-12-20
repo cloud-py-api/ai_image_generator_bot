@@ -8,6 +8,7 @@
 **Requires [`AppAPI`](https://github.com/cloud-py-api/app_api) to work.**
 
 The AI model used by this application requires **~9 gigabytes** of video memory.
+
 If the application is running on a CPU, **14 to 18 gigabytes** of system memory is required.
 
 *When using an RTX 3060 12GB, the bot is capable of processing 2 requests per second.*
@@ -15,6 +16,7 @@ If the application is running on a CPU, **14 to 18 gigabytes** of system memory 
 [`AI Model`](https://huggingface.co/stabilityai/sdxl-turbo) is loaded into memory on the first request and remains in it to quickly process further requests.
 
 This is not an example, this is a ready-to-use application, just enable the bot in the conversation, and type:
+
 `@image cinematic portrait of fluffy cat with black eyes`
 	]]></description>
 	<version>1.0.0</version>
