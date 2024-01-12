@@ -28,38 +28,38 @@ build-push:
 
 .PHONY: deploy
 deploy:
-	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:deploy ai_image_generator_bot docker_dev \
 		--info-xml https://raw.githubusercontent.com/cloud-py-api/ai_image_generator_bot/main/appinfo/info.xml
 
 .PHONY: deploy27
 deploy27:
-	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:deploy ai_image_generator_bot docker_dev \
 		--info-xml https://raw.githubusercontent.com/cloud-py-api/ai_image_generator_bot/main/appinfo/info.xml
 
 .PHONY: run
 run:
-	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot docker_dev --force-scopes \
 		--info-xml https://raw.githubusercontent.com/cloud-py-api/ai_image_generator_bot/main/appinfo/info.xml
 
 .PHONY: run27
 run27:
-	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot docker_dev --force-scopes \
 		--info-xml https://raw.githubusercontent.com/cloud-py-api/ai_image_generator_bot/main/appinfo/info.xml
 
 .PHONY: register
 register:
-	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot manual_install --json-info \
   "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"host\":\"host.docker.internal\",\"port\":9080,\"scopes\":{\"required\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"optional\":[]},\"protocol\":\"http\",\"system_app\":1}" \
   --force-scopes --wait-finish
 
 .PHONY: register27
 register27:
-	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent || true
+	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot manual_install --json-info \
   "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"host\":\"host.docker.internal\",\"port\":9080,\"scopes\":{\"required\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"optional\":[]},\"protocol\":\"http\",\"system_app\":1}" \
   --force-scopes --wait-finish
