@@ -16,7 +16,8 @@ from huggingface_hub import snapshot_download
 from nc_py_api import AsyncNextcloudApp, NextcloudApp
 from nc_py_api.ex_app import (
     LogLvl,
-    atalk_bot_app,
+    anc_app,
+    atalk_bot_msg,
     persistent_storage,
     run_app,
     set_handlers,
@@ -126,7 +127,8 @@ async def stable_diffusion_process_request(message: TalkBotMessage):
 
 @APP.post("/stable_diffusion")
 async def stable_diffusion(
-    message: Annotated[TalkBotMessage, Depends(atalk_bot_app)],
+    message: Annotated[TalkBotMessage, Depends(atalk_bot_msg)],
+    _nc: Annotated[AsyncNextcloudApp, Depends(anc_app)],
     background_tasks: BackgroundTasks,
 ):
     if message.object_name == "message" and message.actor_id.startswith("users/"):

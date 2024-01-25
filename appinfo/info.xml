@@ -19,7 +19,7 @@ This is not an example, this is a ready-to-use application, just enable the bot 
 
 `@image cinematic portrait of fluffy cat with black eyes`
 	]]></description>
-	<version>1.0.1</version>
+	<version>2.0.0</version>
 	<licence>MIT</licence>
 	<author mail="andrey18106x@gmail.com" homepage="https://github.com/andrey18106">Andrey Borysenko</author>
 	<author mail="bigcat88@icloud.com" homepage="https://github.com/bigcat88">Alexander Piskun</author>
@@ -41,7 +41,7 @@ This is not an example, this is a ready-to-use application, just enable the bot 
 		<docker-install>
 			<registry>ghcr.io</registry>
 			<image>cloud-py-api/ai_image_generator_bot</image>
-			<image-tag>1.0.0</image-tag>
+			<image-tag>2.0.0</image-tag>
 		</docker-install>
 		<scopes>
 			<required>

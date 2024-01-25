@@ -1,8 +1,7 @@
-nc_py_api[app]>=0.7.0
+nc_py_api[app]>=0.9.0
 diffusers>=0.23.1
 transformers>=4.36.1
 accelerate
 huggingface_hub
 torch
 torchvision
-torchaudio
