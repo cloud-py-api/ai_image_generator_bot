@@ -54,12 +54,12 @@ run27:
 register:
 	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-nextcloud-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot manual_install --json-info \
-  "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"port\":9080,\"scopes\":{\"required\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"optional\":[]},\"system_app\":1}" \
+  "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"port\":9080,\"scopes\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"system_app\":1}" \
   --force-scopes --wait-finish
 
 .PHONY: register27
 register27:
 	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:unregister ai_image_generator_bot --silent --force || true
 	docker exec master-stable27-1 sudo -u www-data php occ app_api:app:register ai_image_generator_bot manual_install --json-info \
-  "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"port\":9080,\"scopes\":{\"required\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"optional\":[]},\"system_app\":1}" \
+  "{\"appid\":\"ai_image_generator_bot\",\"name\":\"AIImageGeneratorBot\",\"daemon_config_name\":\"manual_install\",\"version\":\"1.0.0\",\"secret\":\"12345\",\"port\":9080,\"scopes\":[\"TALK\", \"TALK_BOT\", \"FILES\", \"FILES_SHARING\"],\"system_app\":1}" \
   --force-scopes --wait-finish
