@@ -15,8 +15,8 @@ from fastapi import BackgroundTasks, Depends, FastAPI, Response
 from huggingface_hub import snapshot_download
 from nc_py_api import AsyncNextcloudApp, NextcloudApp
 from nc_py_api.ex_app import (
+    AppAPIAuthMiddleware,
     LogLvl,
-    anc_app,
     atalk_bot_msg,
     persistent_storage,
     run_app,
@@ -32,7 +32,7 @@ MODEL_RUNTIME_OPT = {
 
 
 @asynccontextmanager
-async def lifespan(_app: FastAPI):
+async def lifespan(app: FastAPI):
     if torch.cuda.is_available() or torch.backends.mps.is_available():
         allow_patterns = ["*.fp16.safetensors", "*.json", "*.txt"]
         ignore_patterns = None
@@ -42,7 +42,7 @@ async def lifespan(_app: FastAPI):
         allow_patterns = None
         ignore_patterns = ["*onnx*", "*fp16*", "sd_xl_turbo_1*"]
     set_handlers(
-        APP,
+        app,
         enabled_handler,
         models_to_fetch={
             MODEL_NAME: {
@@ -57,6 +57,7 @@ async def lifespan(_app: FastAPI):
 
 
 APP = FastAPI(lifespan=lifespan)
+APP.add_middleware(AppAPIAuthMiddleware)
 SD_BOT = AsyncTalkBot(
     "/stable_diffusion",
     "Stable Diffusion",
@@ -128,7 +129,6 @@ async def stable_diffusion_process_request(message: TalkBotMessage):
 @APP.post("/stable_diffusion")
 async def stable_diffusion(
     message: Annotated[TalkBotMessage, Depends(atalk_bot_msg)],
-    _nc: Annotated[AsyncNextcloudApp, Depends(anc_app)],
     background_tasks: BackgroundTasks,
 ):
     if message.object_name == "message" and message.actor_id.startswith("users/"):
