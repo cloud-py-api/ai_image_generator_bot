@@ -1,7 +1,8 @@
-nc_py_api[app]>=0.10.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+nc_py_api[app]>=0.12.0
 diffusers>=0.23.1
 transformers>=4.36.1
 accelerate
 huggingface_hub
-torch
-torchvision
