@@ -56,7 +56,7 @@ def hw_install():
     else:
         requirements = "torch torchvision torchaudio"
 
-    process_args = [sys.executable, "-m", "pip", "install", "--force-reinstall", "--no-deps", *requirements.split()]
+    process_args = [sys.executable, "-m", "pip", "install", "--force-reinstall", *requirements.split()]
     subprocess.run(
         process_args,  # noqa: S603
         check=False,
