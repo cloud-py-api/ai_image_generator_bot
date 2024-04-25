@@ -25,8 +25,8 @@ build-push:
 	docker login ghcr.io
 	docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ghcr.io/cloud-py-api/ai_image_generator_bot:2.1.0 .
 
-.PHONY: build-push-last
-build-push-last:
+.PHONY: build-push-latest
+build-push-latest:
 	docker login ghcr.io
 	docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag ghcr.io/cloud-py-api/ai_image_generator_bot:latest .
 

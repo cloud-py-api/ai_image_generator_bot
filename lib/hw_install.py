@@ -51,8 +51,7 @@ def hw_install():
     if defined_accelerator == "cpu":
         requirements = "torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu"
     elif defined_accelerator == "rocm":
-        # TO-DO: upcoming PyTorch 2.3 will have ROCM 6.0 by default
-        requirements = "--pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.0"
+        requirements = "torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0"
     else:
         requirements = "torch torchvision torchaudio"
 
