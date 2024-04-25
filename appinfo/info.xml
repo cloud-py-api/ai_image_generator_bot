@@ -5,7 +5,7 @@
 	<summary>Stable Diffusion Talk Bot</summary>
 	<description>
 	<![CDATA[
-**Requires [`AppAPI`](https://github.com/cloud-py-api/app_api) to work.**
+**Requires [`AppAPI`](https://github.com/cloud-py-api/app_api) version 2.5.0+ to work.**
 
 The AI model used by this application requires **~9 gigabytes** of video memory.
 
@@ -15,11 +15,17 @@ If the application is running on a CPU, **14 to 18 gigabytes** of system memory 
 
 [`AI Model`](https://huggingface.co/stabilityai/sdxl-turbo) is loaded into memory on the first request and remains in it to quickly process further requests.
 
-This is not an example, this is a ready-to-use application, just enable the bot in the conversation, and type:
+After installing, just enable the bot in the conversation, and type:
 
 `@image cinematic portrait of fluffy cat with black eyes`
+
+*Note: We understand that the model used here is quite old and cannot compare with the new SDXL-Lightning*
+
+*We are currently working on a new `much more advanced` image generation project which you can find here: [`Visionatrix`](https://github.com/Visionatrix/Visionatrix)*
+
+*If this is of interest to the Nextcloud community, we can try to adapt Visionatrix either as an Image Provider for Nextcloud 30 or simply as an AppAPI Nextcloud application.*
 	]]></description>
-	<version>2.0.1</version>
+	<version>2.1.0</version>
 	<licence>MIT</licence>
 	<author mail="andrey18106x@gmail.com" homepage="https://github.com/andrey18106">Andrey Borysenko</author>
 	<author mail="bigcat88@icloud.com" homepage="https://github.com/bigcat88">Alexander Piskun</author>
@@ -35,13 +41,13 @@ This is not an example, this is a ready-to-use application, just enable the bot 
 	<bugs>https://github.com/cloud-py-api/ai_image_generator_bot/issues</bugs>
 	<repository type="git">https://github.com/cloud-py-api/ai_image_generator_bot</repository>
 	<dependencies>
-		<nextcloud min-version="27" max-version="29"/>
+		<nextcloud min-version="27" max-version="30"/>
 	</dependencies>
 	<external-app>
 		<docker-install>
 			<registry>ghcr.io</registry>
 			<image>cloud-py-api/ai_image_generator_bot</image>
-			<image-tag>2.0.0</image-tag>
+			<image-tag>2.1.0</image-tag>
 		</docker-install>
 		<scopes>
 			<value>TALK</value>

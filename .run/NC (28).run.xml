@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="NC (last)" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="NC (28)" type="PythonConfigurationType" factoryName="Python">
     <module name="ai_image_generator_bot" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
@@ -10,7 +10,7 @@
       <env name="APP_PORT" value="9080" />
       <env name="APP_SECRET" value="12345" />
       <env name="APP_VERSION" value="1.0.0" />
-      <env name="NEXTCLOUD_URL" value="http://nextcloud.local" />
+      <env name="NEXTCLOUD_URL" value="http://stable28.local" />
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
     <option name="SDK_HOME" value="" />

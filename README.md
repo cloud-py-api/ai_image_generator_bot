@@ -29,3 +29,9 @@ Uses [SDXL-Turbo](https://huggingface.co/stabilityai/sdxl-turbo) for fast image 
 ## State of support
 
 The project is being developed in personal and free time, any ideas or pull requests are welcome.
+
+*Note: We understand that the model used here is quite old and cannot compare with the new SDXL-Lightning*
+
+*We are currently working on a new much more advanced image generation project which you can find here: [Visionatrix](https://github.com/Visionatrix/Visionatrix)*
+
+*If this is of interest to the Nextcloud community, we can try to adapt Visionatrix either as an Image Provider for Nextcloud 30 or simply as an AppAPI Nextcloud application.*
